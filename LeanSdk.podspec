@@ -88,7 +88,7 @@ Pod::Spec.new do |spec|
   #  Not including the public_header_files will make all headers public.
   #
 
-  spec.source_files  = "LeanSdk", "LeanSdk/**/*.{h,m,swift}"
+  spec.source_files  = "LeanSdk/**/*.{h,m,swift}"
 
   # spec.public_header_files = "Classes/**/*.h"
 
