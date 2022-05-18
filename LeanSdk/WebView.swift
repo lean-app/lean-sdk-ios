@@ -1,10 +1,3 @@
-//
-//  WebView.swift
-//  LeanSdk
-//
-//  Created by Fede Ruiz on 09/05/2022.
-//
-
 import UIKit
 import WebKit
 
@@ -17,11 +10,15 @@ class WebViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler,
     var isFullScreen: Bool
     var messageHandler: MessageHandler
     var auth: String
-    init(url: String, auth: String, isFullScreen: Bool, messageHandler: @escaping MessageHandler) {
+    var parentView: UIView
+
+    
+    init(parentView: UIView, url: String, auth: String, isFullScreen: Bool, messageHandler: @escaping MessageHandler) {
         self.url = url
         self.isFullScreen = isFullScreen
         self.messageHandler = messageHandler
         self.auth = auth
+        self.parentView = parentView
         super.init(nibName: nil, bundle: nil)
         self.modalPresentationStyle = self.isFullScreen ? .fullScreen : .overCurrentContext
         self.modalTransitionStyle = self.isFullScreen ? .coverVertical : .crossDissolve
@@ -51,11 +48,13 @@ class WebViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler,
             .expires: NSDate(timeIntervalSinceNow: 31556926)
         ])!
         webConfiguration.websiteDataStore.httpCookieStore.setCookie(cookie)
-        webView = WKWebView(frame: self.isFullScreen ? CGRect( x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height) : CGRect( x: 0, y: self.view.frame.height / 2, width: self.view.frame.width, height: 274 ), configuration: webConfiguration)
+        webView = WKWebView(frame: self.isFullScreen ? CGRect( x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height) : CGRect( x: 0, y: 0, width: parentView.frame.width, height: parentView.frame.height), configuration: webConfiguration)
         webView.uiDelegate = self
         webView.scrollView.bounces = false
+        webView.backgroundColor = .white
         self.view.addSubview(webView)
         
+        self.view.frame = CGRect( x: 0, y: 0, width: parentView.frame.width, height: parentView.frame.height)
         let myURL = URL(string:self.url)
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
@@ -109,16 +108,16 @@ class WebViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler,
     func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         return true
     }
-    
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
-        if navigationAction.targetFrame == nil {
-            if let url = navigationAction.request.url {
-                let app = UIApplication.shared
-                if app.canOpenURL(url) {
-                    app.open(url, options: [:], completionHandler: nil)
+            if navigationAction.targetFrame == nil {
+                if let url = navigationAction.request.url {
+                    let app = UIApplication.shared
+                    if app.canOpenURL(url) {
+                        app.open(url, options: [:], completionHandler: nil)
+                    }
                 }
             }
+            decisionHandler(.allow)
         }
-        decisionHandler(.allow)
-    }
+    
 }
