@@ -13,7 +13,6 @@
 		78AC4AB828298D520079CED1 /* LeanSdk.h in Headers */ = {isa = PBXBuildFile; fileRef = 78AC4AAA28298D520079CED1 /* LeanSdk.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		78AC4B30283319100079CED1 /* LeanSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AC4B2E283319100079CED1 /* LeanSdk.swift */; };
 		78AC4B31283319100079CED1 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AC4B2F283319100079CED1 /* WebView.swift */; };
-		78AC4B37283319C30079CED1 /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AC4B35283319C30079CED1 /* Requests.swift */; };
 		78AC4B38283319C30079CED1 /* JWTDecode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AC4B36283319C30079CED1 /* JWTDecode.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,7 +34,6 @@
 		78AC4AB628298D520079CED1 /* LeanSdkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeanSdkTests.swift; sourceTree = "<group>"; };
 		78AC4B2E283319100079CED1 /* LeanSdk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeanSdk.swift; sourceTree = "<group>"; };
 		78AC4B2F283319100079CED1 /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
-		78AC4B35283319C30079CED1 /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		78AC4B36283319C30079CED1 /* JWTDecode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JWTDecode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,7 +77,7 @@
 		78AC4AA928298D520079CED1 /* LeanSdk */ = {
 			isa = PBXGroup;
 			children = (
-				78AC4B34283319B60079CED1 /* utils */,
+				78AC4B36283319C30079CED1 /* JWTDecode.swift */,
 				78AC4B2E283319100079CED1 /* LeanSdk.swift */,
 				78AC4B2F283319100079CED1 /* WebView.swift */,
 				78AC4AAA28298D520079CED1 /* LeanSdk.h */,
@@ -94,15 +92,6 @@
 				78AC4AB628298D520079CED1 /* LeanSdkTests.swift */,
 			);
 			path = LeanSdkTests;
-			sourceTree = "<group>";
-		};
-		78AC4B34283319B60079CED1 /* utils */ = {
-			isa = PBXGroup;
-			children = (
-				78AC4B36283319C30079CED1 /* JWTDecode.swift */,
-				78AC4B35283319C30079CED1 /* Requests.swift */,
-			);
-			path = utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,7 +204,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				78AC4B31283319100079CED1 /* WebView.swift in Sources */,
-				78AC4B37283319C30079CED1 /* Requests.swift in Sources */,
 				78AC4B30283319100079CED1 /* LeanSdk.swift in Sources */,
 				78AC4B38283319C30079CED1 /* JWTDecode.swift in Sources */,
 				78AC4AAC28298D520079CED1 /* LeanSdk.docc in Sources */,
