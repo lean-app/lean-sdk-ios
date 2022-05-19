@@ -10,17 +10,22 @@ import WebKit
 
 typealias MessageHandler = (_ message: String) -> Void
 
+
 class WebViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler, UIGestureRecognizerDelegate {
     private var tapOutsideRecognizer: UITapGestureRecognizer!
     public var webView: WKWebView!
-    var url: String
-    var isFullScreen: Bool
-    var messageHandler: MessageHandler
-    var auth: String
-    init(url: String, auth: String, isFullScreen: Bool, messageHandler: @escaping MessageHandler) {
+    
+    let url: String
+    let isFullScreen: Bool
+    let messageHandler: MessageHandler
+    let theme: Theme;
+    
+    let auth: String
+    init(url: String, auth: String, isFullScreen: Bool, theme userTheme: Theme?, messageHandler: @escaping MessageHandler) {
         self.url = url
         self.isFullScreen = isFullScreen
         self.messageHandler = messageHandler
+        self.theme = userTheme ?? Theme()
         self.auth = auth
         super.init(nibName: nil, bundle: nil)
         self.modalPresentationStyle = self.isFullScreen ? .fullScreen : .overCurrentContext
@@ -59,6 +64,26 @@ class WebViewController: UIViewController, WKUIDelegate, WKScriptMessageHandler,
         let myURL = URL(string:self.url)
         let myRequest = URLRequest(url: myURL!)
         webView.load(myRequest)
+        
+        webView.evaluateJavaScript("""
+              const root = document.documentElement;
+              root.style.setProperty('--lean-color-primary', \(theme.color["primary"] ?? ""));
+              root.style.setProperty('--lean-color-secondary', \(theme.color["primary"] ?? ""));
+              root.style.setProperty('--lean-color-error', \(theme.color["secondary"] ?? ""));
+
+              
+              root.style.setProperty('--lean-color-text-primary', \(theme.color["textPrimary"] ?? ""));
+              root.style.setProperty('--lean-color-text-secondary', \(theme.color["textSecondary"] ?? ""));
+              root.style.setProperty('--lean-color-text-interactive', \(theme.color["textInteractive"] ?? ""));
+
+              root.style.setProperty('--lean-font-family', \(theme.fontFamily));
+
+              root.style.setProperty('--lean-font-weight-light', \(theme.fontWeight["light"] ?? ""));
+              root.style.setProperty('--lean-font-weight-regular', \(theme.fontWeight["regular"] ?? ""));
+              root.style.setProperty('--lean-font-weight-medium', \(theme.fontWeight["medium"] ?? ""));
+              root.style.setProperty('--lean-font-weight-semibold', \(theme.fontWeight["semibold"] ?? ""));
+              root.style.setProperty('--lean-font-weight-bold', \(theme.fontWeight["bold"] ?? ""));
+        """)
         super.viewDidLoad()
         UIView.animate(withDuration: 0.5, animations: {
             self.view.backgroundColor = UIColor.lightGray.withAlphaComponent(0.3)
