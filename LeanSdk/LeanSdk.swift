@@ -29,7 +29,7 @@ public class Lean {
     var webviewHost: String
     var parentView: UIView
     
-    public init(parentView: UIView, userToken: String, options: [String: String]? = nil) {
+    public init(parentView: UIView, userToken: String, theme: Theme?, options: [String: String]? = nil) {
         self.parentView = parentView
         let host = webviewHosts[options?["environment"] ?? "PRODUCTION"]
         webviewHost = host ?? webviewHosts["PRODUCTION"]!
@@ -43,20 +43,20 @@ public class Lean {
             default:
                 url = "signup"
         }
-        
-        let controller = WebViewController(parentView: parentView, url: webviewHost + "initial/" + url, auth: userToken, isFullScreen: false, messageHandler: self.messageHandler)
+       
+        let controller = WebViewController(parentView: parentView, url: webviewHost + "initial/" + url, auth: userToken, isFullScreen: false, theme: theme, messageHandler: self.messageHandler)
         self.dashboardWebViewController = controller
         
-        let signupWebViewController = WebViewController(parentView: parentView, url: webviewHost + "onboarding/introduction", auth: userToken, isFullScreen: true, messageHandler: self.messageHandler)
+        let signupWebViewController = WebViewController(parentView: parentView, url: webviewHost + "onboarding/introduction", auth: userToken, isFullScreen: true, theme: theme, messageHandler: self.messageHandler)
         self.signupWebViewController = signupWebViewController
         
-        let cardWebViewController = WebViewController(parentView: parentView, url: webviewHost + "card", auth: userToken, isFullScreen: true, messageHandler: self.messageHandler)
+        let cardWebViewController = WebViewController(parentView: parentView, url: webviewHost + "card", auth: userToken, isFullScreen: true, theme: theme, messageHandler: self.messageHandler)
         self.cardWebViewController = cardWebViewController
         
-        let accountWebViewController = WebViewController(parentView: parentView, url: webviewHost + "account", auth: userToken, isFullScreen: true, messageHandler: self.messageHandler)
+        let accountWebViewController = WebViewController(parentView: parentView, url: webviewHost + "account", auth: userToken, isFullScreen: true, theme: theme, messageHandler: self.messageHandler)
         self.accountWebViewController = accountWebViewController
         
-        let transactionsWebViewController = WebViewController(parentView: parentView, url: webviewHost + "transactions/ledger", auth: userToken, isFullScreen: true, messageHandler: self.messageHandler)
+        let transactionsWebViewController = WebViewController(parentView: parentView, url: webviewHost + "transactions/ledger", auth: userToken, isFullScreen: true, theme: theme, messageHandler: self.messageHandler)
         self.transactionsWebViewController = transactionsWebViewController
         
         DispatchQueue.global(qos: .background).async {
