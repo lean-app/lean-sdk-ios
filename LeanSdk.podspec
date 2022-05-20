@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "LeanSdk"
-  spec.version      = "0.1.2"
+  spec.version      = "0.1.5"
   spec.summary      = "LeanSdk"
 
   # This description is used to generate tags and improve search results.
