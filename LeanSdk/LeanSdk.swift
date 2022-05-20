@@ -18,7 +18,7 @@ let webviewHosts = [
 ]
 
 public class Lean {
-        
+
     var dashboardWebViewController: WebViewController! = nil
     var signupWebViewController: WebViewController! = nil
     var cardWebViewController: WebViewController! = nil
@@ -28,9 +28,11 @@ public class Lean {
     var customerToken: String
     var webviewHost: String
     var parentView: UIView
-    
-    public init(parentView: UIView, userToken: String, theme: Theme?, options: [String: String]? = nil) {
+    var onEvent: (([String: Any]) -> Void)?
+
+    public init(parentView: UIView, userToken: String, theme: Theme?, onEvent: (([String: Any]) -> Void)? = nil, options: [String: String]? = nil) {
         self.parentView = parentView
+        self.onEvent = onEvent
         let host = webviewHosts[options?["environment"] ?? "PRODUCTION"]
         webviewHost = host ?? webviewHosts["PRODUCTION"]!
         customerToken = userToken
@@ -43,22 +45,22 @@ public class Lean {
             default:
                 url = "signup"
         }
-       
+
         let controller = WebViewController(parentView: parentView, url: webviewHost + "initial/" + url, auth: userToken, isFullScreen: false, theme: theme, messageHandler: self.messageHandler)
         self.dashboardWebViewController = controller
-        
+
         let signupWebViewController = WebViewController(parentView: parentView, url: webviewHost + "onboarding/introduction", auth: userToken, isFullScreen: true, theme: theme, messageHandler: self.messageHandler)
         self.signupWebViewController = signupWebViewController
-        
+
         let cardWebViewController = WebViewController(parentView: parentView, url: webviewHost + "card", auth: userToken, isFullScreen: true, theme: theme, messageHandler: self.messageHandler)
         self.cardWebViewController = cardWebViewController
-        
+
         let accountWebViewController = WebViewController(parentView: parentView, url: webviewHost + "account", auth: userToken, isFullScreen: true, theme: theme, messageHandler: self.messageHandler)
         self.accountWebViewController = accountWebViewController
-        
+
         let transactionsWebViewController = WebViewController(parentView: parentView, url: webviewHost + "transactions/ledger", auth: userToken, isFullScreen: true, theme: theme, messageHandler: self.messageHandler)
         self.transactionsWebViewController = transactionsWebViewController
-        
+
         DispatchQueue.global(qos: .background).async {
             // Background Thread
             DispatchQueue.main.async {
@@ -71,7 +73,7 @@ public class Lean {
         }
         self.showController()
     }
-    
+
     func presentController(controller: UIViewController, animated: Bool) {
         var parentViewController: UIViewController? {
                 // Starts from next (As we know self is not a UIViewController).
@@ -88,8 +90,11 @@ public class Lean {
             parentViewController!.present(controller, animated: animated, completion: nil)
         }
     }
-    
+
     private func messageHandler(data: String) {
+        if (self.onEvent != nil) {
+          self.onEvent!(["data": ["action": data]])
+        }
         switch data {
         case "dismiss", "complete-onboarding":
             signupWebViewController.dismiss(animated: true, completion: nil)
@@ -102,7 +107,7 @@ public class Lean {
                 let request = URLRequest(url: url!)
                 self.dashboardWebViewController.webView.load(request)
             }
-            
+
             break
         case "navigate-signup":
             presentController(controller: signupWebViewController, animated: true)
