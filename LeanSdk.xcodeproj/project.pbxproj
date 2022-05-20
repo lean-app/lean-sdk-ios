@@ -14,6 +14,7 @@
 		78AC4B30283319100079CED1 /* LeanSdk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AC4B2E283319100079CED1 /* LeanSdk.swift */; };
 		78AC4B31283319100079CED1 /* WebView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AC4B2F283319100079CED1 /* WebView.swift */; };
 		78AC4B38283319C30079CED1 /* JWTDecode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78AC4B36283319C30079CED1 /* JWTDecode.swift */; };
+		78E91D1C2837304F0021248D /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E91D1B2837304F0021248D /* Theme.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,6 +36,7 @@
 		78AC4B2E283319100079CED1 /* LeanSdk.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LeanSdk.swift; sourceTree = "<group>"; };
 		78AC4B2F283319100079CED1 /* WebView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebView.swift; sourceTree = "<group>"; };
 		78AC4B36283319C30079CED1 /* JWTDecode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JWTDecode.swift; sourceTree = "<group>"; };
+		78E91D1B2837304F0021248D /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +79,7 @@
 		78AC4AA928298D520079CED1 /* LeanSdk */ = {
 			isa = PBXGroup;
 			children = (
+				78E91D1B2837304F0021248D /* Theme.swift */,
 				78AC4B36283319C30079CED1 /* JWTDecode.swift */,
 				78AC4B2E283319100079CED1 /* LeanSdk.swift */,
 				78AC4B2F283319100079CED1 /* WebView.swift */,
@@ -205,6 +208,7 @@
 			files = (
 				78AC4B31283319100079CED1 /* WebView.swift in Sources */,
 				78AC4B30283319100079CED1 /* LeanSdk.swift in Sources */,
+				78E91D1C2837304F0021248D /* Theme.swift in Sources */,
 				78AC4B38283319C30079CED1 /* JWTDecode.swift in Sources */,
 				78AC4AAC28298D520079CED1 /* LeanSdk.docc in Sources */,
 			);
