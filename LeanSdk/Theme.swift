@@ -4,11 +4,11 @@ public class Theme {
     
     let fontWeight: Dictionary<String, String>
     
-    convenience init() {
+    convenience public init() {
         self.init(color: [:], fontFamily: "", fontWeight: [:] )
     }
     
-    init(color userColors: Dictionary<String, String>?, fontFamily userFontFamily: String?, fontWeight userFontWeight: Dictionary<String, String>?) {
+    public init(color userColors: Dictionary<String, String>?, fontFamily userFontFamily: String?, fontWeight userFontWeight: Dictionary<String, String>?) {
         color = [
             "primary": "",
             "secondary": "",
